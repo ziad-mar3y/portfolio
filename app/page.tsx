@@ -48,6 +48,16 @@ export default function Portfolio() {
       liveUrl: "https://third-assin-js.vercel.app/",
       category: "BookMarker",
     },
+    {
+      id: 4,
+      title: "Portfolio",
+      description:
+        "This portfolio website was crafted using Next.js and Tailwind CSS, showcasing not just my projects but also my approach to modern web development. Every element—from the smooth scrolling navigation to the responsive layout—demonstrates my commitment to creating exceptional user experiences.",
+      image: "/images/PortfolioPhoto.PNG",
+      tech: ["Next.js", "Tailwind CSS", "React"],
+      liveUrl: "https://third-assin-js.vercel.app/",
+      category: "Portfolio",
+    },
   ];
 
   const skills = [
