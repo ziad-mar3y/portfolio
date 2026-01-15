@@ -55,7 +55,7 @@ export default function Portfolio() {
         "This portfolio website was crafted using Next.js and Tailwind CSS, showcasing not just my projects but also my approach to modern web development. Every element—from the smooth scrolling navigation to the responsive layout—demonstrates my commitment to creating exceptional user experiences.",
       image: "/images/PortfolioPhoto.PNG",
       tech: ["Next.js", "Tailwind CSS", "React"],
-      liveUrl: "https://third-assin-js.vercel.app/",
+      liveUrl: "https://portfolio-blush-pi-58.vercel.app/",
       category: "Portfolio",
     },
   ];
@@ -221,7 +221,7 @@ export default function Portfolio() {
 
       <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center">My Projects</h2>
+          <h2 className="text-4xl font-bold mb-12 text-center ">My Projects</h2>
           <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project) => (
               <div
