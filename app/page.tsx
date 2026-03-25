@@ -17,8 +17,18 @@ export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const projects = [
-    {
+      {
       id: 1,
+      title: "Shogol",
+      description:
+        "Developed a web-based bookmark management application that allows users to save, organize, and access their favorite websites efficiently. The application features a clean, intuitive interface with full CRUD (Create, Read, Update, Delete) functionality for managing bookmarks.",
+      image: "/images/Shogol.png",
+      tech: ["HTML", "CSS", "JS", "next.js" , "Tailwind CSS", "lucide-react" , "react-query" , ],
+      liveUrl: "https://shoogl.vercel.app ",
+      category: "Shogol",
+    },
+    {
+      id: 2,
       title: "Social Media Platform",
       description:
         "A modern social networking application built with cutting-edge technologies. Features real-time interactions, user profiles, and seamless content sharing capabilities.",
@@ -29,25 +39,16 @@ export default function Portfolio() {
       category: "Web Application",
     },
     {
-      id: 2,
+      id: 3,
       title: "E-Commerce Shop",
       description:
         "A fully functional online shopping platform with modern UI/UX. Includes product browsing, shopping cart functionality, and responsive design for all devices.",
       image: "/images/E-commercePhoto.PNG",
-      tech: ["Next.js", "React", "Tailwind CSS"],
+      tech: ["Next.js", "Tailwind CSS", "lucide-react" ,"react-query" , ],
       liveUrl: "https://shop-site-hazel.vercel.app/",
       category: "E-Commerce",
     },
-    {
-      id: 3,
-      title: "Bookmarker",
-      description:
-        "Developed a web-based bookmark management application that allows users to save, organize, and access their favorite websites efficiently. The application features a clean, intuitive interface with full CRUD (Create, Read, Update, Delete) functionality for managing bookmarks.",
-      image: "/images/BookmarkerPhoto.PNG",
-      tech: ["HTML", "CSS", "JS"],
-      liveUrl: "https://third-assin-js.vercel.app/",
-      category: "BookMarker",
-    },
+ 
     {
       id: 4,
       title: "Portfolio",
@@ -301,3 +302,4 @@ export default function Portfolio() {
     </div>
   );
 }
+
