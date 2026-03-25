@@ -2,7 +2,6 @@
 import { useState } from "react";
 import {
   Github,
-  Linkedin,
   Mail,
   ExternalLink,
   Menu,
@@ -11,44 +10,60 @@ import {
   Palette,
   Zap,
 } from "lucide-react";
-import Image from "next/image";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const projects = [
-      {
+    {
       id: 1,
       title: "Shogol",
       description:
-        "Developed a web-based bookmark management application that allows users to save, organize, and access their favorite websites efficiently. The application features a clean, intuitive interface with full CRUD (Create, Read, Update, Delete) functionality for managing bookmarks.",
+        "A modern job marketplace platform connecting companies with freelancers. Built with Next.js, Tailwind CSS, and React Query for a seamless user experience.",
       image: "/images/Shogol.png",
-      tech: ["HTML", "CSS", "JS", "next.js" , "Tailwind CSS", "lucide-react" , "react-query" , ],
-      liveUrl: "https://shoogl.vercel.app ",
-      category: "Shogol",
+      tech: [
+        "Next.js",
+        "Tailwind CSS",
+        "React",
+        "Framer Motion",
+        "React Query",
+        "Zod",
+        "NextAuth",
+      ],
+      liveUrl: "https://shoogl.vercel.app",
+      category: "Marketplace",
     },
     {
       id: 2,
-      title: "Social Media Platform",
-      description:
-        "A modern social networking application built with cutting-edge technologies. Features real-time interactions, user profiles, and seamless content sharing capabilities.",
-      image:
-       "/images/SocialMediaPhoto.PNG",
-      tech: ["Next.js", "React", "Tailwind CSS"],
-      liveUrl: "https://social-three-eta.vercel.app/",
-      category: "Web Application",
-    },
-    {
-      id: 3,
       title: "E-Commerce Shop",
       description:
-        "A fully functional online shopping platform with modern UI/UX. Includes product browsing, shopping cart functionality, and responsive design for all devices.",
+        "A fully functional e-commerce platform with cart, authentication, and responsive modern UI.",
       image: "/images/E-commercePhoto.PNG",
-      tech: ["Next.js", "Tailwind CSS", "lucide-react" ,"react-query" , ],
+      tech: [
+        "Next.js",
+        "Tailwind",
+        "React",
+        "Framer Motion",
+        "radix",
+        "NextAuth",
+        "Zod",
+        "react-hook-form",
+      ],
       liveUrl: "https://shop-site-hazel.vercel.app/",
       category: "E-Commerce",
     },
- 
+    {
+      id: 3,
+      title: "Social Media",
+      description:
+        "A social media app with modern UI, profiles, and smooth interactions.",
+      image: "/images/SocialMediaPhoto.PNG",
+      tech: ["Next.js", "React", "Tailwind"],
+      liveUrl: "https://social-three-eta.vercel.app/",
+      category: "App",
+    },
     {
       id: 4,
       title: "Portfolio",
@@ -62,244 +77,194 @@ export default function Portfolio() {
   ];
 
   const skills = [
-    { name: "Next.js", icon: <Code className="w-6 h-6" /> },
-    { name: "React", icon: <Zap className="w-6 h-6" /> },
-    { name: "Tailwind CSS", icon: <Palette className="w-6 h-6" /> },
-    { name: "JavaScript", icon: <Code className="w-6 h-6" /> },
-    { name: "TypeScript", icon: <Code className="w-6 h-6" /> },
-    { name: "Responsive Design", icon: <Palette className="w-6 h-6" /> },
+    { name: "Next.js", icon: <Code /> },
+    { name: "React", icon: <Zap /> },
+    { name: "Tailwind", icon: <Palette /> },
+    { name: "JavaScript", icon: <Code /> },
+    { name: "TypeScript", icon: <Code /> },
+    { name: "Responsive Design", icon: <Palette /> },
   ];
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const scrollToSection = (id: any) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
     setIsMenuOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
-      <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-purple-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="text-2xl font-bold bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              My Portfolio
-            </div>
+    <div className="relative min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 blur-3xl rounded-full"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/20 blur-3xl rounded-full"></div>
+      </div>
 
-            <div className="hidden md:flex space-x-8">
-              <button
-                onClick={() => scrollToSection("home")}
-                className="hover:text-purple-400 transition"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
-                className="hover:text-purple-400 transition"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("projects")}
-                className="hover:text-purple-400 transition"
-              >
-                Projects
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="hover:text-purple-400 transition"
-              >
-                Contact
-              </button>
-            </div>
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full bg-white/5 backdrop-blur-lg border-b border-white/10 z-50 ">
+  <div className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center ">
+    
+    {/* Logo */}
+    <h1 className="text-xl font-bold bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+      My portfolio
+    </h1>
 
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden"
-            >
-              {isMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+    {/* Desktop Menu */}
+    <div className="hidden md:flex gap-8 text-white  ">
+      {["Home", "About", "Projects", "Contact"].map((sec) => (
+        <button
+          key={sec}
+          onClick={() => scrollToSection(sec)}
+          className="hover:text-purple-400 transition"
+        >
+          {sec}
+        </button>
+      ))}
+    </div>
+
+    {/* Mobile Button */}
+    <button className="md:hidden text-white " onClick={() => setIsMenuOpen(!isMenuOpen)}>
+      {isMenuOpen ? <X /> : <Menu />}
+    </button>
+  </div>
+
+  {/* Mobile Menu Dropdown */}
+  {isMenuOpen && (
+    <div className="md:hidden bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-lg border-t border-white/10 px-6 py-4 space-y-4">
+      {["Home", "About", "Projects", "Contact"].map((sec) => (
+        <button
+          key={sec}
+          onClick={() => {
+            scrollToSection(sec);
+            setIsMenuOpen(false); // close menu after click
+          }}
+          className="block w-full text-left text-white hover:text-purple-400 transition"
+        >
+          {sec}
+        </button>
+      ))}
+    </div>
+  )}
+</nav>
+
+      {/* Hero */}
+      <section id="Home" className="pt-40 pb-32 text-center px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="mb-6 inline-block px-4 py-2 bg-white/10 rounded-full text-sm">
+            🚀 Available for Freelance
           </div>
-        </div>
 
-        {isMenuOpen && (
-          <div className="md:hidden bg-slate-800/95 backdrop-blur-md">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <button
-                onClick={() => scrollToSection("home")}
-                className="block w-full text-left px-3 py-2 hover:bg-purple-500/20 rounded"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
-                className="block w-full text-left px-3 py-2 hover:bg-purple-500/20 rounded"
-              >
-                About
-              </button>
-              <button
-                onClick={() => scrollToSection("projects")}
-                className="block w-full text-left px-3 py-2 hover:bg-purple-500/20 rounded"
-              >
-                Projects
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
-                className="block w-full text-left px-3 py-2 hover:bg-purple-500/20 rounded"
-              >
-                Contact
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
-
-      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
-            Hi, I'm{" "}
-            <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <h1 className="text-6xl font-extrabold mb-6">
+            Hi, I'm
+            <span className="block bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Ziad Mohamed
             </span>
           </h1>
-          <p className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            a Frontend Developer passionate about crafting beautiful and functional web experiences. I specialize in transforming ideas into reality using modern technologies like React, Next.js, and Tailwind CSS.
+
+          <p className="text-gray-300 max-w-2xl mx-auto mb-8">
+            Frontend Developer specialized in building modern, fast, and
+            interactive web applications.
           </p>
-          <div className="flex justify-center gap-4 flex-wrap">
+
+          <div className="flex justify-center gap-4">
             <button
               onClick={() => scrollToSection("projects")}
-              className="bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-full font-semibold transition transform hover:scale-105"
+              className="px-8 py-3 rounded-full bg-linear-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/30"
             >
               View Projects
             </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="border-2 border-purple-400 hover:bg-purple-400/10 px-8 py-3 rounded-full font-semibold transition"
-            >
-              Contact Me
-            </button>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      <section
-        id="about"
-        className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/30"
-      >
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center">About Me</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-gray-300 text-lg mb-6">
-                I'm a passionate developer who loves creating beautiful and
-                functional web applications. With expertise in modern frameworks
-                and a keen eye for design, I transform ideas into reality.
-              </p>
-              <p className="text-gray-300 text-lg">
-                My focus is on writing clean, efficient code and delivering
-                outstanding user experiences that make a difference.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className="bg-slate-700/50 p-6 rounded-lg hover:bg-slate-700 transition transform hover:scale-105"
-                >
-                  <div className="text-purple-400 mb-2">{skill.icon}</div>
-                  <h3 className="font-semibold">{skill.name}</h3>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* About */}
+      <section id="About" className="py-32 px-6">
+        <h2 className="text-5xl font-extrabold text-center mb-16 bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          About Me
+        </h2>
 
-      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold mb-12 text-center ">My Projects</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project) => (
+        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <p className="text-gray-300 text-lg">
+            I build modern UI with smooth animations and clean code. My goal is
+            to create products that feel fast and look beautiful.
+          </p>
+
+          <div className="grid grid-cols-2 gap-4">
+            {skills.map((s, i) => (
               <div
-                key={project.id}
-                className="bg-slate-800/50 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-purple-500/20"
+                key={i}
+                className="bg-white/5 backdrop-blur-lg border border-white/10 p-6 rounded-2xl hover:scale-105 transition"
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <div className="text-purple-400 text-sm font-semibold mb-2">
-                    {project.category}
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                  <p className="text-gray-300 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-purple-400 hover:text-purple-300 font-semibold"
-                  >
-                    View Live <ExternalLink className="ml-2 w-4 h-4" />
-                  </a>
-                </div>
+                <div className="text-purple-400 mb-2">{s.icon}</div>
+                {s.name}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section
-        id="contact"
-        className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/30"
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8">Get In Touch</h2>
-          <p className="text-gray-300 text-lg mb-12">
-            I'm always open to discussing new projects, creative ideas, or
-            opportunities to be part of your vision.
-          </p>
-          <div className="flex justify-center gap-6">
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=ziadmar3y1@gmail.com"
-              className="bg-slate-700 hover:bg-slate-600 p-4 rounded-full transition transform hover:scale-110"
+      {/* Projects */}
+      <section id="Projects" className="py-32 px-6">
+        <h2 className="text-5xl font-extrabold text-center mb-16">Projects</h2>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {projects.map((p) => (
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl overflow-hidden hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 transition"
             >
-              <Mail className="w-6 h-6" />
-            </a>
-            <a
-              href="https://github.com/ziad-mar3y"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-slate-700 hover:bg-slate-600 p-4 rounded-full transition transform hover:scale-110"
-            >
-              <Github className="w-6 h-6" />
-            </a>
-          </div>
+              <img src={p.image} className="h-48 w-full object-cover" />
+
+              <div className="p-6">
+                <h3 className="text-2xl font-bold mb-2">{p.title}</h3>
+                <p className="text-gray-300 mb-4">{p.description}</p>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {p.tech.map((t, i) => (
+                    <span
+                      key={i}
+                      className="bg-purple-500/20 px-3 py-1 rounded-full text-sm"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex justify-between">
+                  <a href={p.liveUrl} target="_blank" className="flex gap-2">
+                    Live Demo
+                    <ExternalLink />
+                  </a>
+                  <Link
+                    href={`/projects/${p.title.toLowerCase().replace(/\s+/g, "")}`}
+                  >
+                    View Case Study →
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      <footer className="py-8 px-4 border-t border-purple-500/20">
-        <div className="max-w-7xl mx-auto text-center text-gray-400">
-          <p>&copy; 2025 Your Name. Built with Next.js & Tailwind CSS</p>
+      {/* Contact */}
+      <section id="Contact" className="py-32 text-center">
+        <h2 className="text-4xl font-bold mb-6">Contact Me</h2>
+        <div className="flex justify-center gap-6">
+          <a href="mailto:ziadmar3y1@gmail.com">
+            <Mail />
+          </a>
+          <a href="https://github.com/ziad-mar3y">
+            <Github />
+          </a>
         </div>
-      </footer>
+      </section>
     </div>
   );
 }
-
