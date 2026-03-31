@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -101,50 +102,50 @@ export default function Portfolio() {
 
       {/* Navbar */}
       <nav className="fixed top-0 w-full bg-white/5 backdrop-blur-lg border-b border-white/10 z-50 ">
-  <div className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center ">
-    
-    {/* Logo */}
-    <h1 className="text-xl font-bold bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-      My portfolio
-    </h1>
+        <div className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center ">
 
-    {/* Desktop Menu */}
-    <div className="hidden md:flex gap-8 text-white  ">
-      {["Home", "About", "Projects", "Contact"].map((sec) => (
-        <button
-          key={sec}
-          onClick={() => scrollToSection(sec)}
-          className="hover:text-purple-400 transition"
-        >
-          {sec}
-        </button>
-      ))}
-    </div>
+          {/* Logo */}
+         <Link href="/" className="text-xl font-bold bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            My portfolio
+          </Link>
 
-    {/* Mobile Button */}
-    <button className="md:hidden text-white " onClick={() => setIsMenuOpen(!isMenuOpen)}>
-      {isMenuOpen ? <X /> : <Menu />}
-    </button>
-  </div>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex gap-8 text-white  ">
+            {["Home", "About", "Projects", "Contact"].map((sec) => (
+              <button
+                key={sec}
+                onClick={() => scrollToSection(sec)}
+                className="hover:text-purple-400 transition"
+              >
+                {sec}
+              </button>
+            ))}
+          </div>
 
-  {/* Mobile Menu Dropdown */}
-  {isMenuOpen && (
-    <div className="md:hidden bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-lg border-t border-white/10 px-6 py-4 space-y-4">
-      {["Home", "About", "Projects", "Contact"].map((sec) => (
-        <button
-          key={sec}
-          onClick={() => {
-            scrollToSection(sec);
-            setIsMenuOpen(false); // close menu after click
-          }}
-          className="block w-full text-left text-white hover:text-purple-400 transition"
-        >
-          {sec}
-        </button>
-      ))}
-    </div>
-  )}
-</nav>
+          {/* Mobile Button */}
+          <button className="md:hidden text-white " onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-lg border-t border-white/10 px-6 py-4 space-y-4">
+            {["Home", "About", "Projects", "Contact"].map((sec) => (
+              <button
+                key={sec}
+                onClick={() => {
+                  scrollToSection(sec);
+                  setIsMenuOpen(false); // close menu after click
+                }}
+                className="block w-full text-left text-white hover:text-purple-400 transition"
+              >
+                {sec}
+              </button>
+            ))}
+          </div>
+        )}
+      </nav>
 
       {/* Hero */}
       <section id="Home" className="pt-40 pb-32 text-center px-6">
@@ -153,30 +154,53 @@ export default function Portfolio() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="mb-6 inline-block px-4 py-2 bg-white/10 rounded-full text-sm">
-            🚀 Available for Freelance
-          </div>
+          <div className="flex items-center mb-6 justify-between px-32 gap-4 justify-center md:flex-row ">
 
-          <h1 className="text-6xl font-extrabold mb-6">
-            Hi, I'm
-            <span className="block bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Ziad Mohamed
-            </span>
-          </h1>
 
-          <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-            Frontend Developer specialized in building modern, fast, and
-            interactive web applications.
-          </p>
 
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={() => scrollToSection("projects")}
-              className="px-8 py-3 rounded-full bg-linear-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/30"
+            <div>
+              <div className="inline-block px-4 py-2 bg-white/10 rounded-full text-sm">
+                🚀 Available 
+              </div>
+              <h1 className="text-6xl font-extrabold mb-6">
+                Hi, I'm
+                <span className="block bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Ziad Mohamed
+                </span>
+              </h1>
+
+              <p className="text-gray-300 max-w-2xl mx-auto mb-8">
+                Frontend Developer specialized in building modern, fast, and
+                interactive web applications.
+              </p>
+              <div className="flex justify-center gap-4">
+                <button
+                  onClick={() => scrollToSection("Projects")}
+                  className="px-8 py-3 rounded-full hover:bg-white/10 transition hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30 hover:shadow-pink-500/30 hover:shadow-blue-500/30 bg-linear-to-r from-purple-500 to-pink-500"
+                >
+                  View Projects
+                </button>
+              </div>
+
+            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-4"
             >
-              View Projects
-            </button>
+              <Image
+                width={400}
+                height={400}
+                src="/images/profile.jpg" // Replace with your actual image path
+                alt="Ziad Mohamed"
+                className="w-full h-auto hidden md:block rounded-full border-4 border-purple-400 shadow-xl shadow-purple-500/30"
+              />
+            </motion.div>
           </div>
+
+
+
         </motion.div>
       </section>
 
